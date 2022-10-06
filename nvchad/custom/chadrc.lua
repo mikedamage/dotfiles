@@ -6,7 +6,7 @@ local M = {}
 -- example of changing theme:
 
 M.ui = {
-   theme = "catppuccin",
+   theme = "gruvbox_material",
 }
 
 M.plugins = {
@@ -16,6 +16,10 @@ M.plugins = {
       ["nvim-treesitter/nvim-treesitter"] = {
          autotag = {
             enable = true,
+         },
+
+         endwise = {
+           enable = true,
          },
 
          rainbow = {
@@ -31,6 +35,20 @@ M.plugins = {
             { "nvim-telescope/telescope-live-grep-args.nvim" },
          },
       },
+
+      ["williamboman/mason.nvim"] = {
+        ensure_installed = {
+          "lua-language-server",
+          "stylua",
+          "css-lsp",
+          "html-lsp",
+          "typescript-language-server",
+          "json-lsp",
+          "shfmt",
+          "shellcheck",
+          "solargraph",
+        },
+      }
    },
 }
 

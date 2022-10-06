@@ -1,32 +1,56 @@
-local M = {}
+local on_attach = require("plugins.configs.lspconfig").on_attach
+local capabilities = require("plugins.configs.lspconfig").capabilities
+local lspconfig = require "lspconfig"
+local extra_settings = {}
 
-M.setup_lsp = function(attach, capabilities)
-  local lspconfig = require "lspconfig"
+local servers = {
+  "solargraph",
+  "cssls",
+  "html",
+  "tsserver",
+  "jsonls",
+}
 
-  local servers = { "html", "vuels", "tailwindcss" }
-
-  for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
-      on_attach = function(client, bufnr)
-        local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-        attach(client, bufnr)
-
-        if lsp == "vuels" then
-          vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-              print("Format document")
-              vim.lsp.buf.formatting_sync(nil, 4000)
-            end
-          })
-        end
-      end,
-      capabilities = capabilities
+for _, lsp in ipairs(servers) do
+  if lsp == "solargraph" then
+    extra_settings = {
+      solargraph = {
+        completion = true,
+        diagnostic = true,
+        folding = true,
+        references = true,
+        rename = true,
+        symbols = true,
+      }
     }
+  else
+    extra_settings = {}
   end
+  
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    settings = extra_settings,
+  }
 end
 
-return M
+-- lspconfig.solargraph.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   filetypes = { "ruby" },
+--   root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
+--   settings = {
+--     solargraph = {
+--       -- autoformat = true,
+--       completion = true,
+--       diagnostic = true,
+--       folding = true,
+--       references = true,
+--       rename = true,
+--       symbols = true,
+--     },
+--   },
+-- }

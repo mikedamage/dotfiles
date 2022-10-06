@@ -2,35 +2,32 @@ local null_ls = require "null-ls"
 local b = null_ls.builtins
 
 local sources = {
-   -- JS and web files:
-   b.formatting.prettierd.with {
-      extra_filetypes = { "ruby" },
-   },
-   b.diagnostics.eslint,
-   b.diagnostics.rubocop,
+  -- JS and web files:
+  b.formatting.prettierd,
+  -- b.diagnostics.eslint,
 
-   -- Lua:
-   b.formatting.stylua,
+  -- Lua:
+  b.formatting.stylua,
 
-   -- Shell scripts:
-   b.formatting.shfmt,
-   b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
+  -- Shell scripts:
+  b.formatting.shfmt,
+  -- b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
 }
 
 local M = {}
 
 M.setup = function()
-   null_ls.setup {
-      debug = true,
-      sources = sources,
+  null_ls.setup {
+    debug = true,
+    sources = sources,
 
-      -- format on save:
-      on_attach = function(client)
-         if client.resolved_capabilities.document_formatting then
-            vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 3000)"
-         end
-      end,
-   }
+    -- format on save:
+    on_attach = function(client)
+      if client.resolved_capabilities.document_formatting then
+        vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 3000)"
+      end
+    end,
+  }
 end
 
 return M
