@@ -101,6 +101,7 @@ zinit lucid light-mode for \
   zsh-users/zsh-autosuggestions \
   zdharma-continuum/fast-syntax-highlighting \
   zdharma-continuum/history-search-multi-word \
+  zdharma-continuum/zui \
   zdharma-continuum/zbrowse \
   Tarrasch/zsh-colors \
   zsh-users/zsh-completions \
@@ -110,7 +111,7 @@ zinit lucid light-mode for \
 
 zinit ice from"local" multisrc"*.zsh"
 zinit light "$HOME/.zsh-custom"
-  
+
 # Load starship theme
 zinit ice as"command" from"gh-r" \
           atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
