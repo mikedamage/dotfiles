@@ -6,7 +6,7 @@ local M = {}
 -- example of changing theme:
 
 M.ui = {
-   theme = "gruvbox_material",
+   theme = "everforest",
 }
 
 M.plugins = {
@@ -27,6 +27,10 @@ M.plugins = {
             extended_mode = true,
             max_file_lines = 2000,
          },
+
+        indent = {
+          disable = true,
+        },
       },
 
       ["nvim-telescope/telescope.nvim"] = {

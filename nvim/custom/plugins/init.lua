@@ -73,4 +73,8 @@ return {
   },
 
   ["MunifTanjim/nui.nvim"] = { "MunifTanjim/nui.nvim" },
+
+  -- ["sheerun/vim-polyglot"] = { "sheerun/vim-polyglot" },
+
+  ["bfredl/nvim-luadev"] = { "bfredl/nvim-luadev" },
 }

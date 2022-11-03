@@ -107,7 +107,8 @@ zinit lucid light-mode for \
   zsh-users/zsh-completions \
   caarlos0/ports \
   arzzen/calc.plugin.zsh \
-  jreese/zsh-titles
+  jreese/zsh-titles \
+  redxtech/zsh-kitty
 
 zinit ice from"local" multisrc"*.zsh"
 zinit light "$HOME/.zsh-custom"
@@ -118,3 +119,7 @@ zinit ice as"command" from"gh-r" \
           atpull"%atclone" src"init.zsh" # pull behavior same as clone, source init.zsh
 zinit light starship/starship
 
+# FZF config
+export FZF_DEFAULT_COMMAND="fd"
+
+__kitty_complete
